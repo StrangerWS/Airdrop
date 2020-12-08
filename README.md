@@ -41,7 +41,7 @@ You will always get 4 + `difficulty level` rewards.
 
 The idea is to have fun opening the crates and to deliver the crate accurately to the surface.
 
-##Content updates
+## Content updates
 Currently there are a lot of ideas for new zones, new skins e.g. for some events, new modes.
 
 ## References
