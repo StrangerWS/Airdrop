@@ -8,7 +8,7 @@
 It is a hyper-casual game about cargo transportation in danger zones. The concept was inspired by numerous *battle-royale* games where players may get an airdrop.
 
 ## Concept
-You are the pilot of the airdrop plane. You drop the box in random zone (reaction check - dependency of difficulty level) and then you are controlling the parachute trying to avoid rapid fire from anti aircraft guns. Each X shots decreases the value of the box. After landing you are opening the box to get coins and exp for other zones (exp) and skins (coins).
+You are the pilot of the airdrop plane. You drop the box in random zone (reaction check - dependency of difficulty level) and then you are controlling the parachute trying to avoid rapid fire from anti aircraft guns. Each X shots  decreases the value of the box. After landing you are opening the box to get coins and exp for other zones (exp) and skins (coins).
 
 Another mode - shooting the airdrop. You are controlling the anti-aircraft gun and trying to shoot the drop. You are getting a tiny amount of coins after each successful shot.
 
