@@ -51,13 +51,13 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Consts\EnvironmentConsts.cs" />
-     <Compile Include="Assets\Scripts\Behaviour\CrateFactory.cs" />
-     <Compile Include="Assets\Scripts\Entity\BaseEntity.cs" />
      <Compile Include="Assets\Scripts\Event\SceneSuccessEvent.cs" />
      <Compile Include="Assets\Scripts\Behaviour\AbstractCrateController.cs" />
+     <Compile Include="Assets\Scripts\Entity\ObjectSpawner.cs" />
      <Compile Include="Assets\Scripts\Schema\ControllerSchema.cs" />
-     <Compile Include="Assets\Scripts\Entity\Crate.cs" />
      <Compile Include="Assets\Scripts\Consts\CrateType.cs" />
+     <Compile Include="Assets\Scripts\Behaviour\MissileBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Behaviour\CameraMovementBehaviour.cs" />
      <None Include="Assets\ThirdParty\BOXOPHOBIC\Skybox Cubemap Extended\Core\Shaders\Skybox Cubemap Extended.shader" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>L:/Unity Projects/Airdrop!/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
