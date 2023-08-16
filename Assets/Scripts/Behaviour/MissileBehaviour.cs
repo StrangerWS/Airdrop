@@ -1,37 +1,38 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Entity;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class MissileBehaviour : MonoBehaviour
+namespace Behaviour
 {
-    public float minSpeed = 500f;
-    public float maxSpeed = 1000f;
-    private float _maxHeight = 1200f;
-    
-    // Start is called before the first frame update
-    void Start()
+    public class MissileBehaviour : DagerousObject
     {
-        
-    }
+        public float minSpeed = 500f;
+        public float maxSpeed = 1000f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        transform.Translate(Vector3.up * Time.deltaTime * Random.Range(minSpeed, maxSpeed));
-        
-        if (transform.position.y >= _maxHeight)
+        // Start is called before the first frame update
+        void Start()
         {
-            Destroy(this.gameObject);
+            CreateAlertIcon();
         }
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
+        // Update is called once per frame
+        void Update() 
         {
-            Destroy(this.gameObject);
+            transform.Translate(Vector3.up * Time.deltaTime * Random.Range(minSpeed, maxSpeed));
+        
+            if (transform.position.y >= maxHeight)
+            {
+                Destroy();
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.tag == "Player")
+            {
+                other.GetComponent<PlayerHealthBehaviour>().TakeDamage();
+                Destroy();
+            }
         }
     }
 }

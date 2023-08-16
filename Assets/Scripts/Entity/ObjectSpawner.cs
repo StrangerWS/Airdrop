@@ -1,67 +1,57 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using Behaviour;
+using Consts;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
-public class ObjectSpawner : MonoBehaviour
+namespace Entity
 {
-    public GameObject objectToSpawn;
-
-    public Transform objectToTarget;
-
-    public int spawnRate = 3;
-    public int maximumObjects = 6;
-
-    public GameObject dangerSign;
-    public Canvas canvas;
-    
-    private int _objectCount;
-    private float _spawnDistance = 150;
-    private int _range = 15;
-
-    // Start is called before the first frame update
-    void Start()
+    public class ObjectSpawner : MonoBehaviour
     {
-        _objectCount = 0;
-        InvokeRepeating("SpawnIfNotMaximumObjects", spawnRate, spawnRate);
-    }
+        public GameState gameState;
 
-    // Update is called once per frame
-    void Update()
-    {
+        public DagerousObject objectToSpawn;
+
+        public Transform objectToTarget;
+
+        public int spawnRate = 3;
+        public int objectsInGroup = 4;
         
-    }
+        public Canvas canvas;
+        
+        private float _spawnDistance = 150;
+        private int _range = 15;
 
-    private void SpawnIfNotMaximumObjects()
-    {
-        if (_objectCount < maximumObjects)
+        // Start is called before the first frame update
+        private void Start()
         {
-            GameObject spawnedObject = Instantiate(objectToSpawn, GetRandomPositionWithinBounds(), Quaternion.identity);
-            CreateAlertIcon(spawnedObject, dangerSign);
-            _objectCount++;
+            InvokeRepeating(nameof(SpawnObjectGroup), spawnRate, spawnRate);
         }
-    }
 
-    private Vector3 GetRandomPositionWithinBounds()
-    {
-        var x = Random.Range(-_range, _range);
-        return new Vector3(x, objectToTarget.position.y - _spawnDistance, 0);
-    }
 
-    private void CreateAlertIcon(GameObject gameObject, GameObject icon)
-    {
-        RectTransform clone = Instantiate(icon, canvas.transform, false).GetComponent<RectTransform>();
+        private void SpawnObjectGroup()
+        {
+            if (!State.Playing.Equals(gameState.State))
+            {
+                return;
+            }
+            for (var i = 0; i < objectsInGroup; i++)
+            {
+                SpawnObject();
+            }
+        }
 
-        Vector2 canvasAnchor = Camera.main.WorldToViewportPoint(gameObject.transform.position);
-        canvasAnchor.y = 0f;
+        private void SpawnObject()
+        {
+            DagerousObject spawnedObject = Instantiate(objectToSpawn, GetRandomPositionWithinBounds(), Quaternion.identity);
+            spawnedObject.canvas = this.canvas;
+            spawnedObject.maxHeight = objectToTarget.position.y + _spawnDistance;
+        }
 
-        clone.anchorMin = canvasAnchor;
-        clone.anchorMax = clone.anchorMin;
-
-        clone.anchoredPosition = new Vector2(clone.localPosition.x, 50.0f);
-        
-        clone.anchorMin = new Vector2(0.5f, 0f);
-        clone.anchorMax = clone.anchorMin;
+        private Vector3 GetRandomPositionWithinBounds()
+        {
+            var x = Random.Range(-_range, _range);
+            return new Vector3(x, objectToTarget.position.y - _spawnDistance, 0);
+        }
     }
 }
